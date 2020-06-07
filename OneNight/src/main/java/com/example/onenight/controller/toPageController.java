@@ -41,5 +41,13 @@ public class toPageController {
         return "index.html";
     }
 
+    /**
+     * 聊天主页
+     */
+    @RequestMapping("/chatIndex.html")
+    public String toChatIndexPage(Model model, HttpSession session){
+        return "chatindex.html";
+    }
+
 
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta isELIgnored="false">
+    <title>Title</title>
+</head>
+<script src="jquery-1.6.2.min.js"></script>
+<!--<script src="MD5Util.js"></script>-->
+<script src="js/md5.js"></script>
+<body>
+helloshh
+<input type="password" name="" id="md5" value="" />
+<input type="button" name="" id="ss" value="MD5加密"  />
+<input type="hidden" id="loginKey" value= />
+</body>
+    <script type="text/javascript">
+    var websocket = null;
+    var loginKey='[[${loginKey}]]';
+    //loginKey=${loginKey};
+    console.log("1"+loginKey);
+    if('WebSocket' in window){
+        websocket = new WebSocket("ws://127.0.0.1:9090/websocket/"+loginKey);
+    }
+
+    websocket.onopen = function(){
+        console.log("连接成功");
+    }
+
+    websocket.onclose = function(){
+        console.log("退出连接");
+    }
+
+    websocket.onmessage = function (event){
+        console.log("收到消息"+event.data);
+    }
+
+    websocket.onerror = function(){
+        console.log("连接出错");
+    }
+
+    window.onbeforeunload = function () {
+        websocket.close(num);
+    }
+
+    $(function () {
+        $("#ss").click(function () {
+            testmd5()
+        })
+    })
+    function testmd5(){
+        var password = $("#md5").val();
+        var md5password = $.md5(password);
+        console.log("没有加密之前的是："+password);
+        console.log("加密以后是："+md5password);
+    }
+</script>
+</html>

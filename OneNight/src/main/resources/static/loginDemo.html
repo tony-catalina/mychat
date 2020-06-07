@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="loginkey" >
+<input type="text" id="password">
+<button id="buttons" name="dd"></button>
+<button id="button2" name="dd2"></button>
+<div id="ban"></div>
+<script src="jquery-1.6.2.min.js"></script>
+<script>
+    $(function () {
+        $("#buttons").click(function () {
+            $.ajax({
+                url:'/test/testLoginSearch',
+                type:'post',
+                data:{loginkey:$("#loginkey").val(),password:$("#password").val()},
+                success:function (e) {
+
+                },
+            })
+        })
+
+        $("#button2").click(function () {
+            $.ajax({
+                url:'/test/testSessionToRedis',
+                type:'post',
+                data:'',
+                success:function (e) {
+
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

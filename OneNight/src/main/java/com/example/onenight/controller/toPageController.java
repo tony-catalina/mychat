@@ -1,6 +1,9 @@
 package com.example.onenight.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.example.onenight.entity.MyChatUser;
+import com.example.onenight.utils.myStringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,8 @@ import java.util.Map;
 
 @Controller
 public class toPageController {
+    @Autowired
+    private myStringUtil stringUtil;
 
     /**
      * 登录页
@@ -46,7 +51,15 @@ public class toPageController {
      */
     @RequestMapping("/chatIndex.html")
     public String toChatIndexPage(Model model, HttpSession session){
-        return "chatindex.html";
+        String loginUser=(String) session.getAttribute("LOGINUSER");
+        if(!stringUtil.isNullorEmpty(loginUser)){
+            model.addAttribute("loginKey", session.getAttribute("LOGINUSER"));
+            return "chatindex.html";
+        }else {
+            return "login/login.html";
+        }
+
+
     }
 
 

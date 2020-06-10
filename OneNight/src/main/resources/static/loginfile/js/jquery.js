@@ -46,7 +46,7 @@ function cliLogin() {
 		success:function (e) {
 			Tip(e.msg);
 			if(e.code==0){
-				window.location.href='index.html';
+				window.location.href='chatIndex.html';
 			}
 		},
 		error:function (e) {

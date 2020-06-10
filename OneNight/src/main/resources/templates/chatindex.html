@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>xChat -Responsive Multi-purpose HTML5 Template</title>
+	<title>xChat-ourChat</title>
 	<meta name="description" content="Cabe - Responsive Multi-purpose HTML5 Template">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -21,9 +21,61 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<script src="jquery-1.6.2.min.js"></script>
 
 </head>
+<script type="text/javascript">
+	var websocket = null;
+	var loginKey='[[${loginKey}]]';
+	//loginKey=${loginKey};
+	console.log("1"+loginKey);
 
+	if('WebSocket' in window){
+		websocket = new WebSocket("ws://127.0.0.1:9090/websocket/"+loginKey);
+	}
+
+	websocket.onopen = function(){
+		console.log("连接成功");
+	}
+
+	websocket.onclose = function(){
+		console.log("退出连接");
+	}
+
+	websocket.onmessage = function (event){
+		console.log("收到消息"+event.data);
+	}
+
+	websocket.onerror = function(){
+		console.log("连接出错");
+	}
+
+	window.onbeforeunload = function () {
+		websocket.close(num);
+	}
+	function setMessageInHtml(message){
+		document.getElementById('message').innerHTML += message;
+	}
+	function clos(){
+		websocket.close(3000,"强制关闭");
+	}
+	function send(){
+		var msg = document.getElementById('text').value;
+		websocket.send(msg);
+	}
+
+	$(function () {
+		$("#ss").click(function () {
+			testmd5()
+		})
+	})
+	function testmd5(){
+		var password = $("#md5").val();
+		var md5password = $.md5(password);
+		console.log("没有加密之前的是："+password);
+		console.log("加密以后是："+md5password);
+	}
+</script>
 <body>
 
 	<!--页面弹出浏览导航层-->
@@ -97,7 +149,8 @@
 	<!-- video call modal -->
 	<div class="modal fade show" id="videocall">
 		<div class="modal-dialog modal-lg modal-md modal-dialog-centered modal-dialog-zoom">
-			<div class="modal-content pb-0 d-flex justify-content-between text-center bgi-center" style="background-image: url(chatfile/images/video.jpg); min-height: 500px;">
+			<div class="modal-content pb-0 d-flex justify-content-between text-center bgi-center"
+				 style="background-image: url(chatfile/images/video.jpg); min-height: 500px;">
 				<div class="modal-header">
 					<a href="#" class="live">LIVE-模块功能开发中...</a>
 					<a href="#" class="icon-full"><i class="ti-fullscreen"></i></a>
@@ -142,12 +195,12 @@
 				<!--登录人信息头板块-->
 				<div class="chat-header">
 					<!--登录人信息-->
-	                <div class="chat-header-user">
+	                <div class="chat-header-user" id="loginUserInfo">
 	                    <figure class="avatar">
 	                        <a href="#" class="profile-detail-bttn"><img src="chatfile/images/user-7.png" class="rounded-circle" alt="image"></a>
 	                    </figure>
-	                    <div>
-	                        <h5 class="mt-0 mb-0">James Henry</h5>
+	                    <div id="loginUserName">
+	                        <h5 class="mt-0 mb-0" >James Henry</h5>
 	                        <small class="text-success">james43@gmail.com</small>
 	                    </div>
 	                </div>
@@ -498,7 +551,7 @@
 	                            </figure>
 	                            <div class="list-body">
 	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">John Ive</h3>
+	                                    <h3 class="mb-1 mt-1" title="JoHn">John Ive</h3>
 	                                    <p>What's up, how are you?</p>
 	                                </div>
 	                                <div class="list-action mt-2 text-right">
@@ -1092,14 +1145,14 @@
 				<!--设置tab页面-->
 				<div class="sidebar" id="settings">
 					<!--标题-->
-					<div class="text-left mb-2 mt-3"><h2 class="title-text"><b>Account</b> Settings </h2></div>
+					<div class="text-left mb-2 mt-3"><h2 class="title-text"><b>账号</b> 设置 </h2></div>
 					<div class="chat-list-content mb-3 mt-3">
 						<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							<!--个人资料-->
 							<div class="panel panel-default">
 								<!--我的个人资料标题-->
 								<div class="panel-heading" role="tab" id="headingOne">
-									<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapsed">My Profile <span>Configure your preferences.</span></a></h4>
+									<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="collapsed">我的个人资料 <span>填写你的个人资料.</span></a></h4>
 								</div>
 								<!--个人资料展示页-->
 								<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -1109,7 +1162,7 @@
 						                    <input type="text" class="form-control mb-3" placeholder="City">
 						                    <input type="text" class="form-control mb-3" placeholder="Phone">
 						                    <input type="text" class="form-control mb-3" placeholder="Website">
-						                    <textarea name="name" id="bio" cols="30" rows="4" class="mb-3" placeholder="Write a few words that describe you.."></textarea>
+						                    <textarea name="name" id="bio" cols="30" rows="4" class="mb-3" placeholder="说一些能展示你自己的话吧.."></textarea>
 						                    <button>Save</button>
 						                </form>
 									</div>
@@ -1120,7 +1173,7 @@
 							<div class="panel panel-default">
 								<!--标题-->
 								<div class="panel-heading" role="tab" id="headingTwo">
-									<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="collapsed">Privacy & Safety <span>Configure your preferences.</span></a></h4>
+									<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="collapsed">密码管理 <span>修改你的密码.</span></a></h4>
 								</div>
 								<!--隐私与安全隐藏页-->
 								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -1163,7 +1216,7 @@
 							<div class="panel panel-default">
 								<!--标题-->
 								<div class="panel-heading" role="tab" id="headingFour">
-									<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour" class="collapsed">Appearance <span>Configure your preferences.</span></a></h4>
+									<h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour" class="collapsed">默认设置 <span>选择你的默认设置项.</span></a></h4>
 								</div>
 								<!--首选项隐藏展示页-->
 								<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
@@ -1217,7 +1270,7 @@
 	                <div class="chat-header-action">
 	                    <ul class="list-inline mb-0 mt-2">
 	                        <li class="list-inline-item not-mobile"><a href="#" class="bttn-box-round"><i class="ti-microphone"></i></a></li>
-	                        <li class="list-inline-item not-mobile"><a href="#" class="bttn-box-round" id="videocall-bttn"><i class="ti-video-camera"></i></a></li>
+	                        <li class="list-inline-item"><a href="#" class="bttn-box-round" id="videocall-bttn"><i class="ti-video-camera"></i></a></li>
 	                        <li class="list-inline-item d-xl-none d-lg-none"><a href="#" class="bttn-box-round back-chat-div"><i class="ti-arrow-left"></i></a></li>
 	                        <li class="list-inline-item">
 		                        <a href="#" class="bttn-box-round" data-toggle="dropdown"><i class="ti-more-alt"></i></a>
@@ -1309,7 +1362,10 @@
 	                    <div class="message-item outgoing-message">
 	                        <div class="message-user">
 	                            <figure class="avatar">
-	                                <img src="chatfile/images/user-1.png" alt="image">
+	                                <img src="chatfile/images/user-1.png" alt="ima
+
+
+	                                ge">
 	                            </figure>
 	                            <div>
 	                                <h5>Byrom Guittet</h5>
@@ -1338,6 +1394,9 @@
 
 			<!--用户信息隐藏页-->
 			<div class="right-sidebar" style="overflow: hidden;outline: none;">
+
+
+
 				<div class="profile-content scroll-profile">
 					<header>
 						<h2 class="title-text">Profile</h2>
@@ -1348,7 +1407,10 @@
                             <img src="chatfile/images/user-10.png" class="rounded-circle" alt="image">
                         </figure>
                         <h5 class="mb-0">James Henry</h5>
-                        <small class="text-success">james43@gmail.com</small>
+                        <small class="text-success">jame
+
+
+							s43@gmail.com</small>
 
                        	<ul class="social-link list-inline mt-3">
                        		<li class="list-inline-item"><a href="#"><i class="ti-facebook bg-facebook"></i></a></li>
@@ -1399,6 +1461,16 @@
 	<!-- SCRIPTS -->
 	<script src="chatfile/js/plugin.js"></script>
 	<script src="chatfile/js/main.min.js"></script>
+<script type="text/javascript">
+	var loginKeyArr=loginKey.split("@@");
+	alert(loginKeyArr[1]);
+	if(loginKeyArr[1]!='null'){
+		$("#loginUserName").text(loginKeyArr[1]);
+	}else {
+		$("#loginUserInfo").find("h5").text("未设置昵称")
+	}
+
+</script>
 	
 	
 

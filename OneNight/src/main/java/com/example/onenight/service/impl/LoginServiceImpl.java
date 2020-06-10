@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
                 LoginUser loginUser=new LoginUser();
                 loginUser.setLoginCode(user1.getUserAccount(),user1.getUserName());
                 session.setAttribute("LOGINUSER",loginUser.getLoginCode());
-                String md5Account=loginUser.getLoginCode().substring(0,loginUser.getLoginCode().indexOf("^^"));
+                String md5Account=loginUser.getLoginCode().substring(0,loginUser.getLoginCode().indexOf("@@"));
                 user1.setIsLogin(1);
                 redisUtil.set("USERINFO_"+md5Account,user1,3600);
                 return ResultUtils.success("登录成功",loginUser.getLoginCode());

@@ -12,4 +12,6 @@ public interface MyChatUserService {
     Result doRegisterAccount(String account, String password);
 
     Result selectUserByAccount(String account);
+
+    Result selectUserInfoByAccount(String account);
 }

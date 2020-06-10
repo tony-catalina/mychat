@@ -14,9 +14,11 @@ public class LoginUser {
         //暂时没有写自己的加密算法，这里借用MD5；
         StringBuffer encryptionStr= new StringBuffer(MD5Utils.str2MD5(loginCode));
         long timeStr=System.currentTimeMillis();
-        encryptionStr.append("^^");
+        encryptionStr.append("@@");
         encryptionStr.append(userName);
-        encryptionStr.append("^^");
+        encryptionStr.append("@@");
+        encryptionStr.append(loginCode);
+        encryptionStr.append("@@");
         encryptionStr.append(timeStr);
         this.loginCode = encryptionStr.toString();
     }

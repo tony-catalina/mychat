@@ -54,4 +54,15 @@ public class MyChatUserServiceImpl implements MyChatUserService {
         }
 
     }
+
+    @Override
+    public Result selectUserInfoByAccount(String account) {
+        MyChatUser myChatUser=myChatUserMapper.selectForLogin(account);
+        if(myChatUser!=null){
+            return ResultUtils.success("查询成功",myChatUser);
+        }else {
+            return ResultUtils.error("查询失败,数据库中没有该人员信息,系统有被攻击风险");
+        }
+
+    }
 }

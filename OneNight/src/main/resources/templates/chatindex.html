@@ -123,17 +123,17 @@
 			            </button>
 			        </div>
 			        <div class="modal-body add-friend pl-4 pr-4">
-			            <div class="alert alert-info text-left">发送邀请给朋友</div>
 			            <form>
 			                <div class="form-group text-left">
-			                    <label for="emails" class="col-form-label">好友备注</label>
-			                    <input type="text" class="form-control" id="emails">
+			                    <label for="apply_friend_name" class="col-form-label">好友备注</label>
+			                    <input type="text" class="form-control" id="apply_friend_name">
 			                </div>
 			                <div class="form-group text-left">
-			                    <label for="message" class="col-form-label">邀请讯息</label>
-			                    <textarea class="form-control" id="message"></textarea>
+			                    <label for="apply_friend_message" class="col-form-label">邀请讯息</label>
+			                    <textarea class="form-control" id="apply_friend_message"></textarea>
 			                </div>
 			            </form>
+						<div class="alert alert-info text-center" id="sendFriendApply">发送邀请给朋友</div>
 			        </div>
 			        <div class="modal-footer add-friend">
 			            <button type="button" class="btn btn-primary">提交</button>
@@ -476,12 +476,12 @@
 					<!--查找联系人搜索框-->
 					<div class="form-content">
 						<form action="#" class="mb-3 mt-1">
-				            <input type="text" class="form-control" placeholder="输入姓名以查找联系人">
+				            <input type="text" class="form-control" id="user-home-list" placeholder="输入姓名或城市查找联系人">
 				        </form>
 				    </div>
 					<!--联系人列表-->
 				     <div class="chat-list-content">
-	                	<ul class="chat-list">
+	                	<ul class="chat-list" id="userList">
 	                		<li class="chat-list-item">
 	                			<figure class="avatar user-online">
 	                                <img src="chatfile/images/user-2.png" alt="image">
@@ -502,194 +502,6 @@
 										</div>
 	                                </div>
 	                            </div>
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <span class="avatar-title bg-primary rounded-circle">M</span>
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Victor Exrixon</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <img src="chatfile/images/user-3.png" alt="image">
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Surfiya Zakir</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <span class="avatar-title bg-info rounded-circle">J</span>
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1" title="JoHn">John Ive</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <span class="avatar-title bg-warning rounded-circle">G</span>
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Goria Coast</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <img src="chatfile/images/user-4.png" alt="image">
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Hurin Seary</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <img src="chatfile/images/user-5.png" alt="image">
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Victor Exrixon</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <span class="avatar-title bg-danger rounded-circle">V</span>
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Surfiya Zakir</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <img src="chatfile/images/user-6.png" alt="image">
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">John Ive</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
-	                		</li>
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <img src="chatfile/images/user-8.png" alt="image">
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Goria Coast</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <a href="#" class="btn-plus dropdown-toggle" data-toggle="dropdown"><i class="ti-plus"></i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a href="#" class="dropdown-item">Open</a>
-											<a href="#" class="dropdown-item">Restore</a>
-											<div class="dropdown-divider"></div>
-											<a href="#" class="dropdown-item text-danger">Delete</a>
-										</div>
-	                                </div>
-	                            </div>
-	                            
 	                		</li>
 	                	</ul>
 	                </div>
@@ -1407,10 +1219,7 @@
                             <img src="chatfile/images/user-10.png" class="rounded-circle" alt="image">
                         </figure>
                         <h5 class="mb-0">James Henry</h5>
-                        <small class="text-success">jame
-
-
-							s43@gmail.com</small>
+                        <small class="text-success">james43@gmail.com</small>
 
                        	<ul class="social-link list-inline mt-3">
                        		<li class="list-inline-item"><a href="#"><i class="ti-facebook bg-facebook"></i></a></li>
@@ -1469,6 +1278,16 @@
 	}else {
 		$("#loginUserInfo").find("h5").text("未设置昵称")
 	}
+	if(loginKeyArr[2]!='null'){
+		$("#loginUserInfo").find("small").text(loginKeyArr[2]);
+	}else {
+		$("#loginUserInfo").find("small").text("---------")
+	}
+
+	userList();
+
+
+
 
 </script>
 	

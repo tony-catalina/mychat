@@ -7,6 +7,8 @@ package com.example.onenight.utils;
  * @date 2020/4/3
  */
 public class Result<T> {
+    /** 登录错误 */
+    public static final Integer ERR_LOGIN = 1;
     /** 校验错误 */
     public static final Integer ERR_VALIDATE = -1;
 

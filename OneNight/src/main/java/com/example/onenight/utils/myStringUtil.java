@@ -3,6 +3,10 @@ package com.example.onenight.utils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
@@ -113,6 +117,74 @@ public class myStringUtil {
         String afterShuffle = sb.toString();
         String result = afterShuffle.substring(5, 11);
         return result;
+    }
+
+
+    /**
+     * @Annotate:获取有中间代理的发送请求设备ip(Apache,Squid)
+     * @author ztx
+     * @date 2020/6/11
+     */
+    public String getIp(HttpServletRequest request) {
+
+        String ip = request.getHeader("X-Real-IP");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("X-Forwarded-For");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        // 处理多IP的情况（只取第一个IP）
+        if (ip != null && ip.contains(",")) {
+            String[] ipArray = ip.split(",");
+            ip = ipArray[0];
+        }
+        System.err.println(ip);
+        return ip;
+    }
+
+    /**
+     * @Annotate:正常获取发送请求设备ip
+     * @author ztx
+     * @date 2020/6/11
+     */
+    public String getIp2(HttpServletRequest request){
+
+        String requestUrlIP = request.getServerName();
+        String userIpAddr = request.getRemoteAddr();
+        System.out.println("***访问的Url中的服务器IP："+requestUrlIP);
+        System.out.println("***用户客户端的IP地址："+userIpAddr);
+        return userIpAddr;
+    }
+
+    /**
+     * @Annotate:通过cmd命令获取本机ip
+     * @author ztx
+     * @date 2020/6/12
+     */
+    public String getLocalIPForCMD() {
+        StringBuilder sb = new StringBuilder();
+        String command = "cmd.exe /c ipconfig | findstr IPv4"; 		// 管道命令
+        try {
+            Process p = Runtime.getRuntime().exec(command); 		// 执行命令
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream())); // 包装缓冲输入流
+            String line = null;
+            while((line = br.readLine()) != null){					//循环读取
+                line = line.substring(line.lastIndexOf(":")+2,line.length()); //截取IPV4地址
+                sb.append(line);
+            }
+            br.close();  					// 字符流关闭
+            p.destroy(); 					// 进程销毁
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString(); 				// 返回IPV4地址
     }
 
 

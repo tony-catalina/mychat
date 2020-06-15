@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/userInfo")
@@ -42,6 +44,23 @@ public class userInfoController {
             }
             System.out.println("========"+ JSON.toJSONString(myChatUser));
             return ResultUtils.success("查询成功",myChatUser);
+        }else {
+            return ResultUtils.error("用户未登录或登录信息失效,请先登录");
+        }
+
+    }
+
+    @PostMapping("/userInfoList")
+    @ResponseBody
+    public Result userInfoList(HttpSession session, HttpServletRequest request){
+        String loginUser=(String) session.getAttribute("LOGINUSER");
+        String searchKey=request.getParameter("searchKey");
+        if(!stringUtil.isNullorEmpty(loginUser)) {
+            if(!stringUtil.isNullorEmpty(searchKey)){
+                return myChatUserService.selectNormalUserBySearchKey(loginUser,searchKey);
+            }else {
+                return myChatUserService.selectAllNormalUserInfo(loginUser);
+            }
         }else {
             return ResultUtils.error("用户未登录或登录信息失效,请先登录");
         }

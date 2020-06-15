@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class MyChatUserServiceImpl implements MyChatUserService {
@@ -65,4 +67,19 @@ public class MyChatUserServiceImpl implements MyChatUserService {
         }
 
     }
+
+    @Override
+    public Result selectAllNormalUserInfo(String loginUser) {
+        String[] loginKeyArr=loginUser.split("@@");
+        List<Map<String,Object>> myChatUsers=myChatUserMapper.selectAllUserInfo(0,1,loginKeyArr[2]);
+        return ResultUtils.success("查询成功",myChatUsers);
+    }
+
+    @Override
+    public Result selectNormalUserBySearchKey(String loginUser, String searchKey) {
+        String[] loginkeyArr=loginUser.split("@@");
+        List<Map<String,Object>> maps=myChatUserMapper.selectNormalUserBySearchKey(loginkeyArr[2],searchKey);
+        return ResultUtils.success("查询成功",maps);
+    }
+
 }

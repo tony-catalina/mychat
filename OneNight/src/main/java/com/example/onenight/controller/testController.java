@@ -27,6 +27,9 @@ public class testController {
     @Autowired
     RedisUtil redisUtil;
 
+    @Autowired
+    myStringUtil stringUtil;
+
     @RequestMapping("/index")
     public String for_index(){
         return "index.html";
@@ -177,7 +180,13 @@ public class testController {
     @PostMapping("/testLoginSearch")
     @ResponseBody
     public Result testLoginSearch(HttpSession session,HttpServletRequest request){
-      return loginService.doLogin(session,request.getParameter("loginkey"),request.getParameter("password"));
+      //return loginService.doLogin(session,request.getParameter("loginkey"),request.getParameter("password"));
+        String a="1";
+        String b="1";
+        String d=new String("1");
+        boolean c=(a==b);
+
+        return ResultUtils.success("",c);
     }
 
 
@@ -190,6 +199,14 @@ public class testController {
       return  result;
 
 
+    }
+
+
+    @PostMapping("/testGetIP")
+    @ResponseBody
+    public Result getIp(HttpServletRequest request){
+        String ip=stringUtil.getLocalIPForCMD();
+        return ResultUtils.success("查询成功",ip);
     }
 
 }

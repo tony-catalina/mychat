@@ -14,6 +14,8 @@
 	<link rel="stylesheet" href="chatfile/css/themify-icons.css">
 
 	<link rel="stylesheet" href="chatfile/css/main.min.css" type="text/css" media="all">
+	<!--引入弹出层样式-->
+	<link rel="stylesheet" href="Pop_upLayer/css/notiflix-1.3.0.min.css">
 	
 
 
@@ -23,12 +25,22 @@
     <![endif]-->
 	<script src="jquery-1.6.2.min.js"></script>
 
+	<!--引入弹出层js文件-->
+	<script src="Pop_upLayer/js/notiflix-1.3.0.min.js"></script>
+
 </head>
 <script type="text/javascript">
 	var websocket = null;
 	var loginKey='[[${loginKey}]]';
 	//loginKey=${loginKey};
 	console.log("1"+loginKey);
+	/*弹出层事件初始化*/
+	Notiflix.Notify.Init();
+	Notiflix.Report.Init();
+	Notiflix.Confirm.Init();
+	Notiflix.Loading.Init({
+		clickToClose:true
+	});
 
 	if('WebSocket' in window){
 		websocket = new WebSocket("ws://127.0.0.1:9090/websocket/"+loginKey);
@@ -124,6 +136,7 @@
 			        </div>
 			        <div class="modal-body add-friend pl-4 pr-4">
 			            <form>
+							<input type="hidden" id="friend_user_id" value=""/>
 			                <div class="form-group text-left">
 			                    <label for="apply_friend_name" class="col-form-label">好友备注</label>
 			                    <input type="text" class="form-control" id="apply_friend_name">
@@ -135,9 +148,9 @@
 			            </form>
 						<div class="alert alert-info text-center" id="sendFriendApply">发送邀请给朋友</div>
 			        </div>
-			        <div class="modal-footer add-friend">
+			        <!--<div class="modal-footer add-friend" style="margin-bottom: 5px;">
 			            <button type="button" class="btn btn-primary">提交</button>
-			        </div>
+			        </div>-->
 			    </div>
 			</div>
 		</div>
@@ -1274,17 +1287,19 @@
 	var loginKeyArr=loginKey.split("@@");
 	alert(loginKeyArr[1]);
 	if(loginKeyArr[1]!='null'){
-		$("#loginUserName").text(loginKeyArr[1]);
+		$("#loginUserInfo").find("h5").text(loginKeyArr[1]);
 	}else {
 		$("#loginUserInfo").find("h5").text("未设置昵称")
 	}
 	if(loginKeyArr[2]!='null'){
-		$("#loginUserInfo").find("small").text(loginKeyArr[2]);
+		alert(loginKeyArr[2]);
+		alert($("#loginUserInfo").find(".text-success").text());
+		$("#loginUserInfo").find(".text-success").text(loginKeyArr[2]);
 	}else {
-		$("#loginUserInfo").find("small").text("---------")
+		$("#loginUserInfo").find(".text-success").text("---------")
 	}
 
-	userList();
+	userList(undefined);
 
 
 

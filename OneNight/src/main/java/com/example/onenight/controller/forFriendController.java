@@ -1,7 +1,9 @@
 package com.example.onenight.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.example.onenight.entity.FriendApply;
 import com.example.onenight.entity.MyChatUser;
+import com.example.onenight.service.FriendApplyService;
 import com.example.onenight.utils.Result;
 import com.example.onenight.utils.ResultUtils;
 import com.example.onenight.utils.myStringUtil;
@@ -23,6 +25,9 @@ public class forFriendController {
 
     @Autowired
     private userInfoController userInfoController;
+
+    @Autowired
+    FriendApplyService friendApplyService;
 
 
     /**
@@ -51,7 +56,8 @@ public class forFriendController {
             if (!stringUtil.isNullorEmpty(apply_friend_name)){
                 friendApply.setApplyFriendname(apply_friend_name);
             }
-            return ResultUtils.error(Result.ERR_LOGIN,"用户未登录或登录信息失效,请先登录");
+            System.out.println("======"+ JSON.toJSONString(friendApply));
+            return friendApplyService.addOneFriendApply(friendApply);
 
         }else {
             return ResultUtils.error(Result.ERR_LOGIN,"用户未登录或登录信息失效,请先登录");

@@ -71,6 +71,12 @@
       <if test="applyState != null" >
         apply_state,
       </if>
+      <if test="applyFriendname != null" >
+        apply_forfriendname,
+      </if>
+      <if test="applyRemarks != null" >
+        apply_remarks,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="friendapplyId != null" >
@@ -87,6 +93,12 @@
       </if>
       <if test="applyState != null" >
         #{applyState,jdbcType=INTEGER},
+      </if>
+      <if test="applyFriendname != null" >
+        #{applyFriendname,jdbcType=VARCHAR},
+      </if>
+      <if test="applyRemarks != null" >
+        #{applyRemarks,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -124,4 +136,9 @@
       apply_state = #{applyState,jdbcType=INTEGER}
     where friendapply_id = #{friendapplyId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCountByUserId" parameterType="int" resultType="int">
+    select count(friendapply_id) from friendapply where apply_userid=#{userId} and friend_userid=#{friendId} and apply_state=1
+  </select>
+
 </mapper>

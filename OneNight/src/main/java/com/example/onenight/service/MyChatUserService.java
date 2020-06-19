@@ -28,4 +28,7 @@ public interface MyChatUserService {
      * @date 2020/6/15
      */
     Result selectNormalUserBySearchKey(String loginUser,String searchKey);
+
+
+    Result selectUserInfoById(int id);
 }

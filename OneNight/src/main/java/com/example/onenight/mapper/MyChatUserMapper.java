@@ -74,4 +74,7 @@ public interface MyChatUserMapper {
      * @date 2020/4/1
      */
     List<Map<String,Object>> selectNormalUserBySearchKey(@Param("loginUser")String loginUser,@Param("searchKey")String searchKey);
+
+
+    Map<String,Object> selectUserInfoById(@Param("userId")int userId);
 }

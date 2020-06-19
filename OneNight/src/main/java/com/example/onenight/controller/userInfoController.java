@@ -67,4 +67,24 @@ public class userInfoController {
 
     }
 
+    @PostMapping("/getUserInfoById")
+    @ResponseBody
+    public Result getUserInfoById(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        String loginUser=(String) session.getAttribute("LOGINUSER");
+        if(!stringUtil.isNullorEmpty(loginUser)) {
+            int user_id=0;
+            try {
+                user_id=Integer.parseInt(request.getParameter("userId"));
+            }catch (Exception e){
+                return ResultUtils.error("用户ID获取失败");
+            }
+            return myChatUserService.selectUserInfoById(user_id);
+
+        }else {
+            return ResultUtils.error("用户未登录或登录信息失效,请先登录");
+        }
+
+    }
+
 }

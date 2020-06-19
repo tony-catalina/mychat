@@ -5,4 +5,8 @@ import com.example.onenight.utils.Result;
 
 public interface FriendApplyService {
     Result addOneFriendApply(FriendApply friendApply);
+
+    Result getFriendApplyByUserId(int userId,String searchKey);
+
+    Result refuseFriendApply(int friendApplyId);
 }

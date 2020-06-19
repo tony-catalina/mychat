@@ -82,4 +82,10 @@ public class MyChatUserServiceImpl implements MyChatUserService {
         return ResultUtils.success("查询成功",maps);
     }
 
+    @Override
+    public Result selectUserInfoById(int id) {
+        Map<String,Object> maps=myChatUserMapper.selectUserInfoById(id);
+        return ResultUtils.success("查询成功",maps);
+    }
+
 }

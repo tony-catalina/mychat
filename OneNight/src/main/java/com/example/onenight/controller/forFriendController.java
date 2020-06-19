@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/forFriend")
@@ -63,6 +65,49 @@ public class forFriendController {
             return ResultUtils.error(Result.ERR_LOGIN,"用户未登录或登录信息失效,请先登录");
         }
 
+    }
+
+
+    /**
+     * @Annotate:获取登录用户的待处理好友申请通知
+     * @author ztx
+     * @date 2020/6/18
+     */
+    @PostMapping("/getFriendApplyById")
+    @ResponseBody
+    public Result getFriendApplyById(HttpServletRequest request,HttpSession session){
+        String loginUser=(String) session.getAttribute("LOGINUSER");
+        MyChatUser myChatUser=(MyChatUser) userInfoController.findLoginUserInfo(session).getResult();
+
+        String searchKey=request.getParameter("searchKey");
+        if(!stringUtil.isNullorEmpty(loginUser)) {
+            if(!stringUtil.isNullorEmpty(searchKey)){
+                return friendApplyService.getFriendApplyByUserId(myChatUser.getUserId(),searchKey);
+            }else {
+                return friendApplyService.getFriendApplyByUserId(myChatUser.getUserId(),"");
+            }
+
+
+        }else {
+            return ResultUtils.error(Result.ERR_LOGIN,"用户未登录或登录信息失效,请先登录");
+        }
+    }
+
+    @PostMapping("/refuseFriendApply")
+    @ResponseBody
+    public Result refuseFriendApply(HttpSession session,HttpServletRequest request){
+        String loginUser=(String) session.getAttribute("LOGINUSER");
+
+        String friendApplyId=request.getParameter("friendApplyId");
+        if(!stringUtil.isNullorEmpty(loginUser)) {
+            if(!stringUtil.isNullorEmpty(friendApplyId)){
+                return friendApplyService.refuseFriendApply(Integer.parseInt(friendApplyId));
+            }else {
+                return ResultUtils.error("获取申请记录ID失败");
+            }
+        }else {
+            return ResultUtils.error(Result.ERR_LOGIN,"用户未登录或登录信息失效,请先登录");
+        }
     }
 
 }

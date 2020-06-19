@@ -4,6 +4,9 @@ import com.example.onenight.entity.FriendApply;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Map;
+
 @Component
 public interface FriendApplyMapper {
     /**
@@ -61,4 +64,11 @@ public interface FriendApplyMapper {
      * @date 2020/6/16
      */
     int selectCountByUserId(@Param("userId")int userId,@Param("friendId")int friendId);
+
+    /**
+     * @Annotate:根据friendId获取申请添加好友的信息
+     * @author ztx
+     * @date 2020/6/17
+     */
+    List<Map<String,Object>> getFriendApply(@Param("friendId")int friendId,@Param("searchKey")String searchKey);
 }

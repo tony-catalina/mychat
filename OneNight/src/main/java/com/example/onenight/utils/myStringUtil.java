@@ -189,5 +189,25 @@ public class myStringUtil {
 
 
 
+    /**
+     * @Annotate:将datetime类型的时间转成上午下午的时:分字符串
+     * @author ztx
+     * @date 2020/6/17
+     */
+    public String dateTimeToHourStr(String dateTime){
+        String timeStr=dateTime.substring(dateTime.indexOf(" "));
+        String[] timeArr=timeStr.trim().split(":");
+        String apply_time=null;
+        if(12>Integer.parseInt(timeArr[0])){
+            apply_time=timeArr[0]+":"+timeArr[1]+" AM";
+        }else if(12==Integer.parseInt(timeArr[0])){
+            apply_time=timeArr[0]+":"+timeArr[1]+" PM";
+        }else {
+            apply_time=(Integer.parseInt(timeArr[0])-12)+":"+timeArr[1]+" PM";
+        }
+        return apply_time;
+    }
+
+
 
 }

@@ -209,4 +209,13 @@ public class testController {
         return ResultUtils.success("查询成功",ip);
     }
 
+
+    @PostMapping("/testGetHourStr")
+    @ResponseBody
+    public Result getHourStr(HttpServletRequest request){
+        String dateTime=request.getParameter("dateTime");
+        String timeStr=stringUtil.dateTimeToHourStr(dateTime);
+        return ResultUtils.success("查询成功",timeStr);
+    }
+
 }

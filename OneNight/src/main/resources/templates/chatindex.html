@@ -770,61 +770,16 @@
 				<!--通知tab-->
 				<div class="sidebar" id="notification">
 					<!--通知标题-->
-					<div class="text-left mb-2 mt-3"><h2 class="title-text"><b>Notification</b></h2></div>
+					<div class="text-left mb-2 mt-3"><h2 class="title-text"><b>通知信息</b></h2></div>
 					<!--搜索框-->
 					<div class="form-content">
 						<form action="#" class="mb-3 mt-1">
-				            <input type="text" class="form-control" placeholder="Seacrh notification..">
+				            <input type="text" id="notification-home-list" class="form-control" placeholder="查询通知信息..">
 				        </form>
 				    </div>
 					<!--通知信息列表-->
 				    <div class="chat-list-content">
-	                	<ul class="chat-list">
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <span class="avatar-title bg-secondary rounded-circle"><i class="ti-zip"></i></span>
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">file.txt</h3>
-	                                    <p>What's up, how are you?</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <small>03:41 PM</small>
-	                                    <div class="dropdown">
-	                                    	<a href="#" class="more dropdown-toggle" data-toggle="dropdown"><i class="ti-more-alt"></i></a>
-											<div class="dropdown-menu dropdown-menu-right">
-												<a href="#" class="dropdown-item">Action</a>
-												<div class="dropdown-divider"></div>
-												<a href="#" class="dropdown-item text-danger">Delete</a>
-											</div>
-										</div>
-	                                </div>
-	                            </div>
-	                		</li>
-
-	                		<li class="chat-list-item">
-	                			<figure class="avatar user-online">
-	                                <span class="avatar-title bg-secondary rounded-circle"><i class="ti-video-camera"></i></span>
-	                            </figure>
-	                            <div class="list-body">
-	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Hurin Seary</h3>
-	                                    <p>You missed a video call.</p>
-	                                </div>
-	                                <div class="list-action mt-2 text-right">
-	                                    <small>03:41 PM</small>
-	                                    <div class="dropdown">
-	                                    	<a href="#" class="more dropdown-toggle" data-toggle="dropdown"><i class="ti-more-alt"></i></a>
-											<div class="dropdown-menu dropdown-menu-right">
-												<a href="#" class="dropdown-item">Action</a>
-												<div class="dropdown-divider"></div>
-												<a href="#" class="dropdown-item text-danger">Delete</a>
-											</div>
-										</div>
-	                                </div>
-	                            </div>
-	                		</li>
+	                	<ul class="chat-list" id="notificationList">
 
 	                		<li class="chat-list-item">
 	                			<figure class="avatar user-online">
@@ -832,22 +787,68 @@
 	                            </figure>
 	                            <div class="list-body">
 	                            	<div class="chat-bttn">
-	                                    <h3 class="mb-1 mt-1">Surfiya Zakir</h3>
+	                                    <h3 class="mb-1 mt-1">测试数据</h3>
 	                                    <p>You have got a heart</p>
 	                                </div>
 	                                <div class="list-action mt-2 text-right">
 	                                    <small>03:41 PM</small>
 	                                    <div class="dropdown">
-	                                    	<a href="#" class="more dropdown-toggle" data-toggle="dropdown"><i class="ti-more-alt"></i></a>
+	                                    	<a href="#" class="more dropdown-toggle" style="display: inline"data-toggle="dropdown"><i class="ti-more-alt"></i></a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a href="#" class="dropdown-item">同意添加</a>
+												<div class="dropdown-divider"></div>
+												<a href="#" class="dropdown-item text-danger">拒绝添加</a>
+											</div>
+										</div>
+	                                </div>
+	                            </div>
+	                		</li>
+
+							<!--<li class="chat-list-item">
+								<figure class="avatar user-online">
+									<span class="avatar-title bg-secondary rounded-circle"><i class="ti-zip"></i></span>
+								</figure>
+								<div class="list-body">
+									<div class="chat-bttn">
+										<h3 class="mb-1 mt-1">file.txt</h3>
+										<p>What's up, how are you?</p>
+									</div>
+									<div class="list-action mt-2 text-right">
+										<small>03:41 PM</small>
+										<div class="dropdown">
+											<a href="#" class="more dropdown-toggle" data-toggle="dropdown"><i class="ti-more-alt"></i></a>
 											<div class="dropdown-menu dropdown-menu-right">
 												<a href="#" class="dropdown-item">Action</a>
 												<div class="dropdown-divider"></div>
 												<a href="#" class="dropdown-item text-danger">Delete</a>
 											</div>
 										</div>
-	                                </div>
-	                            </div>
-	                		</li>
+									</div>
+								</div>
+							</li>
+
+							<li class="chat-list-item">
+								<figure class="avatar user-online">
+									<span class="avatar-title bg-secondary rounded-circle"><i class="ti-video-camera"></i></span>
+								</figure>
+								<div class="list-body">
+									<div class="chat-bttn">
+										<h3 class="mb-1 mt-1">Hurin Seary</h3>
+										<p>You missed a video call.</p>
+									</div>
+									<div class="list-action mt-2 text-right">
+										<small>03:41 PM</small>
+										<div class="dropdown">
+											<a href="#" class="more dropdown-toggle" data-toggle="dropdown"><i class="ti-more-alt"></i></a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a href="#" class="dropdown-item">Action</a>
+												<div class="dropdown-divider"></div>
+												<a href="#" class="dropdown-item text-danger">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
 
 	                		<li class="chat-list-item">
 	                			<figure class="avatar user-online">
@@ -961,7 +962,7 @@
 										</div>
 	                                </div>
 	                            </div>
-	                		</li>
+	                		</li>-->
 	                	</ul>
 	                </div>
 				</div>
@@ -1222,9 +1223,9 @@
 
 
 
-				<div class="profile-content scroll-profile">
+				<div class="profile-content scroll-profile" id="hidden-userinfo-tab">
 					<header>
-						<h2 class="title-text">Profile</h2>
+						<h2 class="title-text">个人信息</h2>
 						<a href="#" class="close-icon float-right"><i class="ti-close  text-danger"></i></a>
 					</header>
 					<div class="text-center mt-4">
@@ -1232,16 +1233,16 @@
                             <img src="chatfile/images/user-10.png" class="rounded-circle" alt="image">
                         </figure>
                         <h5 class="mb-0">James Henry</h5>
-                        <small class="text-success">james43@gmail.com</small>
+                        <small class="text-success user-account">james43@gmail.com</small>
 
-                       	<ul class="social-link list-inline mt-3">
+                      <!-- 	<ul class="social-link list-inline mt-3">
                        		<li class="list-inline-item"><a href="#"><i class="ti-facebook bg-facebook"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-twitter-alt bg-twitter"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-google bg-google"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-pinterest bg-pinterest"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-linkedin bg-linkedIn"></i></a></li>
 							<li class="list-inline-item"><a href="#"><i class="ti-github bg-github"></i></a></li>
-                       	</ul>
+                       	</ul>-->
 
                        	<ul class="profile-detail list-inline pt-5">
                        		<li class="list-block-item text-left">
@@ -1292,8 +1293,6 @@
 		$("#loginUserInfo").find("h5").text("未设置昵称")
 	}
 	if(loginKeyArr[2]!='null'){
-		alert(loginKeyArr[2]);
-		alert($("#loginUserInfo").find(".text-success").text());
 		$("#loginUserInfo").find(".text-success").text(loginKeyArr[2]);
 	}else {
 		$("#loginUserInfo").find(".text-success").text("---------")
@@ -1301,7 +1300,7 @@
 
 	userList(undefined);
 
-
+	notification();
 
 
 </script>

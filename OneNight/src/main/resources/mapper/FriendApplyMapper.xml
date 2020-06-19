@@ -121,6 +121,12 @@
       <if test="applyState != null" >
         apply_state = #{applyState,jdbcType=INTEGER},
       </if>
+      <if test="applyFriendname != null" >
+        apply_forfriendname = #{applyFriendname,jdbcType=VARCHAR},
+      </if>
+      <if test="applyRemarks != null" >
+        apply_remarks = #{applyRemarks,jdbcType=VARCHAR},
+      </if>
     </set>
     where friendapply_id = #{friendapplyId,jdbcType=INTEGER}
   </update>
@@ -139,6 +145,18 @@
 
   <select id="selectCountByUserId" parameterType="int" resultType="int">
     select count(friendapply_id) from friendapply where apply_userid=#{userId} and friend_userid=#{friendId} and apply_state=1
+  </select>
+
+
+
+  <select id="getFriendApply" parameterType="int" resultType="java.util.HashMap">
+    select fa.friendapply_id,ui.user_name,fa.apply_userid,DATE_FORMAT(fa.apply_time,'%Y-%m-%d %T') as apply_time,fa.apply_remarks,fa.apply_forfriendname
+    from friendapply fa left join userinfo ui on fa.apply_userid=ui.user_id
+    where fa.friend_userid=#{friendId} and fa.apply_state=1
+    <if test="searchKey!=''">
+      and ui.user_name like CONCAT('%', #{searchKey}, '%')
+    </if>
+
   </select>
 
 </mapper>

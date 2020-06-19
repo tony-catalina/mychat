@@ -44,7 +44,7 @@
   </sql>
   <!--关联users表和userinfo表查询字段-->
   <sql id="user_Column_List" >
-    users.user_id, users.user_name, users.user_account, users.is_login, users.createtime, users.user_state,
+    users.user_id, users.user_name, users.user_account, users.is_login, DATE_FORMAT(users.createtime,'%Y-%m-%d %T') as creatime, users.user_state,
 	userinfo.userinfo_id, userinfo.user_sex, userinfo.user_age, userinfo.user_birthday, userinfo.head_picture,
     userinfo.personal_signature, userinfo.user_city, userinfo.user_qq, userinfo.user_wechat
   </sql>
@@ -231,5 +231,17 @@
 
     </where>
 
+  </select>
+
+
+  <select id="selectUserInfoById" parameterType="int" resultMap="userResultMap">
+    select
+    <include refid="user_Column_List" />
+    from users left join userinfo on users.user_id=userinfo.user_id
+    <where>
+      <if test="userId!=0 and userId!=null">
+         users.user_id=#{userId}
+      </if>
+    </where>
   </select>
 </mapper>
